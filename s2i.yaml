@@ -1,3 +1,4 @@
+warning: Cannot check if git requires authentication.
 apiVersion: v1
 items:
 - apiVersion: image.openshift.io/v1
@@ -7,10 +8,10 @@ items:
       openshift.io/generated-by: OpenShiftNewApp
     creationTimestamp: null
     labels:
-      app: simple
-      app.kubernetes.io/component: simple
-      app.kubernetes.io/instance: simple
-    name: simple
+      app: simple-app
+      app.kubernetes.io/component: simple-app
+      app.kubernetes.io/instance: simple-app
+    name: simple-app
   spec:
     lookupPolicy:
       local: false
@@ -23,21 +24,21 @@ items:
       openshift.io/generated-by: OpenShiftNewApp
     creationTimestamp: null
     labels:
-      app: simple
-      app.kubernetes.io/component: simple
-      app.kubernetes.io/instance: simple
-    name: simple
+      app: simple-app
+      app.kubernetes.io/component: simple-app
+      app.kubernetes.io/instance: simple-app
+    name: simple-app
   spec:
     nodeSelector: null
     output:
       to:
         kind: ImageStreamTag
-        name: simple:latest
+        name: simple-app:latest
     postCommit: {}
     resources: {}
     source:
       git:
-        uri: https://github.com/sandervanvugt/simpleapp
+        uri: https://github.com/brdnikola/simple-app
       type: Git
     strategy:
       sourceStrategy:
@@ -48,10 +49,10 @@ items:
       type: Source
     triggers:
     - github:
-        secret: VDgrFU8FfXUEjkyKBMks
+        secret: u1YkzXrWOJBTJjJ47dRR
       type: GitHub
     - generic:
-        secret: iMtWLmlUc8SKHgbEX_4A
+        secret: LIHwrNXxtWSjGG-TPNzj
       type: Generic
     - type: ConfigChange
     - imageChange: {}
@@ -62,19 +63,19 @@ items:
   kind: Deployment
   metadata:
     annotations:
-      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"simple:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"simple\")].image"}]'
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"simple-app:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"simple-app\")].image"}]'
       openshift.io/generated-by: OpenShiftNewApp
     creationTimestamp: null
     labels:
-      app: simple
-      app.kubernetes.io/component: simple
-      app.kubernetes.io/instance: simple
-    name: simple
+      app: simple-app
+      app.kubernetes.io/component: simple-app
+      app.kubernetes.io/instance: simple-app
+    name: simple-app
   spec:
     replicas: 1
     selector:
       matchLabels:
-        deployment: simple
+        deployment: simple-app
     strategy: {}
     template:
       metadata:
@@ -82,11 +83,11 @@ items:
           openshift.io/generated-by: OpenShiftNewApp
         creationTimestamp: null
         labels:
-          deployment: simple
+          deployment: simple-app
       spec:
         containers:
         - image: ' '
-          name: simple
+          name: simple-app
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -101,10 +102,10 @@ items:
       openshift.io/generated-by: OpenShiftNewApp
     creationTimestamp: null
     labels:
-      app: simple
-      app.kubernetes.io/component: simple
-      app.kubernetes.io/instance: simple
-    name: simple
+      app: simple-app
+      app.kubernetes.io/component: simple-app
+      app.kubernetes.io/instance: simple-app
+    name: simple-app
   spec:
     ports:
     - name: 8080-tcp
@@ -116,7 +117,7 @@ items:
       protocol: TCP
       targetPort: 8443
     selector:
-      deployment: simple
+      deployment: simple-app
   status:
     loadBalancer: {}
 kind: List
